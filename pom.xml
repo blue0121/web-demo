@@ -19,7 +19,7 @@
 		
 		<revision>0.1.0</revision>
 		<spring.boot.version>3.0.0</spring.boot.version>
-		<fastjson2.version>2.0.20</fastjson2.version>
+		<fastjson2.version>2.0.21</fastjson2.version>
 		<lombok.version>1.18.24</lombok.version>
 		<redisson.version>3.18.1</redisson.version>
 		
@@ -41,6 +41,12 @@
 				<version>${spring.boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.alibaba.fastjson2</groupId>
+				<artifactId>fastjson2</artifactId>
+				<version>${fastjson2.version}</version>
 			</dependency>
 			
 			<dependency>
