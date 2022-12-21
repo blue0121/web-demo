@@ -2,25 +2,25 @@ package io.jutil.web.internal.common.core.http;
 
 import io.jutil.web.common.core.http.HttpTemplate;
 import io.jutil.web.common.core.http.HttpTemplateBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.http.HttpClient;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Jin Zheng
  * @since 2021-07-02
  */
+@Slf4j
 public class DefaultHttpTemplateBuilder implements HttpTemplateBuilder {
-    private static Logger logger = LoggerFactory.getLogger(DefaultHttpTemplateBuilder.class);
 
     private String id;
     private String baseUrl;
     private String username;
     private String password;
-    private Map<String, String> defaultHeaders;
+    private final Map<String, String> defaultHeaders = new HashMap<>();
 
     private HttpClient httpClient;
 
@@ -29,8 +29,16 @@ public class DefaultHttpTemplateBuilder implements HttpTemplateBuilder {
 
     @Override
     public HttpTemplate build() {
-        DefaultHttpTemplate client = new DefaultHttpTemplate(this);
-        return client;
+        this.init();
+        return new DefaultHttpTemplate(this);
+    }
+
+    private void init() {
+        if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+            defaultHeaders.put("Authorization", this.authorization());
+        }
+        log.info("Initialize HttpClient, id: {}, baseUrl: {}, username: {}, password: {}, defaultHeaders: {}",
+                id, baseUrl, username, password, defaultHeaders);
     }
 
     /*private void init() {
@@ -87,8 +95,8 @@ public class DefaultHttpTemplateBuilder implements HttpTemplateBuilder {
     }
 
     @Override
-    public HttpTemplateBuilder setDefaultHeaders(Map<String, String> headers) {
-	    this.defaultHeaders = headers;
+    public HttpTemplateBuilder putHeader(String name, String value) {
+        this.defaultHeaders.put(name, value);
         return this;
     }
 

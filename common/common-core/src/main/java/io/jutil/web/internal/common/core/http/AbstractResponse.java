@@ -27,7 +27,6 @@ public abstract class AbstractResponse<T> implements Response<T> {
 		this.body = response.body();
 		this.map = response.headers().map();
 		this.initHeaders();
-		log.info("Response, code: {}", code);
 	}
 
 	private void initHeaders() {

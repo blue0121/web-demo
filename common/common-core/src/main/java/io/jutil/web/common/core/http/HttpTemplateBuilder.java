@@ -1,7 +1,6 @@
 package io.jutil.web.common.core.http;
 
 import java.net.http.HttpClient;
-import java.util.Map;
 
 /**
  * @author Jin Zheng
@@ -19,7 +18,7 @@ public interface HttpTemplateBuilder {
 
 	HttpTemplateBuilder setPassword(String password);
 
-	HttpTemplateBuilder setDefaultHeaders(Map<String, String> headers);
+	HttpTemplateBuilder putHeader(String name, String value);
 
 	HttpTemplateBuilder setHttpClient(HttpClient httpClient);
 

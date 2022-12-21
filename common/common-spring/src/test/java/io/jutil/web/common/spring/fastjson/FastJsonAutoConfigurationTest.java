@@ -15,11 +15,11 @@ import org.springframework.http.HttpStatus;
 public class FastJsonAutoConfigurationTest extends BaseControllerTest {
 
 	@BeforeEach
-	void beforeEach() {
+	public void beforeEach() {
 		this.init();
 	}
 	@Test
-	void testString() {
+	public void testString() {
 		var url = this.buildUrl("/test/blue");
 		var response = restTemplate.getForEntity(url, String.class);
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -27,7 +27,7 @@ public class FastJsonAutoConfigurationTest extends BaseControllerTest {
 	}
 
 	@Test
-	void testJson() {
+	public void testJson() {
 		var url = this.buildUrl("/test");
 		var request = new TestRequest("blue");
 		var response = restTemplate.postForEntity(url, request, TestResponse.class);

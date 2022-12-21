@@ -4,8 +4,7 @@ package io.jutil.web.internal.common.core.http;
 import io.jutil.web.common.core.http.HttpTemplate;
 import io.jutil.web.common.core.http.PathResponse;
 import io.jutil.web.common.core.http.StringResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -22,8 +21,8 @@ import java.util.concurrent.CompletableFuture;
  * @author Jin Zheng
  * @date 2020-07-08
  */
+@Slf4j
 public class DefaultHttpTemplate implements HttpTemplate {
-	private static Logger logger = LoggerFactory.getLogger(DefaultHttpTemplate.class);
 
 	private final DefaultHttpTemplateBuilder builder;
 	private final String id;
@@ -126,7 +125,7 @@ public class DefaultHttpTemplate implements HttpTemplate {
 			builder.header(entry.getKey(), entry.getValue());
 		}
 		builder.method(method, publisher);
-		logger.info("{} url: {}, headers: {}", method, url, map);
+		log.info("{} url: {}, headers: {}", method, url, map);
 		return builder;
 	}
 
@@ -139,7 +138,7 @@ public class DefaultHttpTemplate implements HttpTemplate {
 	}
 
 	private void handleException(Exception cause) {
-		logger.error("Error, ", cause);
+		log.error("Error, ", cause);
 		if (cause instanceof IOException) {
 			throw new UncheckedIOException((IOException) cause);
 		}
