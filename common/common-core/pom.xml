@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.jutil.web</groupId>
 		<artifactId>common</artifactId>
-		<version>0.1.0</version>
+		<version>${revision}</version>
 	</parent>
 	<artifactId>common-core</artifactId>
 

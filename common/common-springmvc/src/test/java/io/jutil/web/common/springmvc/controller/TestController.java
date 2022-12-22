@@ -1,4 +1,4 @@
-package io.jutil.web.common.spring.controller;
+package io.jutil.web.common.springmvc.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

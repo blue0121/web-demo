@@ -1,4 +1,4 @@
-package io.jutil.web.common.spring;
+package io.jutil.web.common.springmvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

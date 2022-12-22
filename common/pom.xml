@@ -6,14 +6,14 @@
     <parent>
         <groupId>io.jutil.web</groupId>
         <artifactId>web-demo</artifactId>
-        <version>0.1.0</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     
     <modules>
         <module>common-core</module>
-        <module>common-spring</module>
+        <module>common-springmvc</module>
     </modules>
 
 </project>

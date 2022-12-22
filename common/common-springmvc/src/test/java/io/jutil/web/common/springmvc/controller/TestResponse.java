@@ -1,4 +1,4 @@
-package io.jutil.web.common.spring.controller;
+package io.jutil.web.common.springmvc.controller;
 
 import lombok.Getter;
 import lombok.Setter;

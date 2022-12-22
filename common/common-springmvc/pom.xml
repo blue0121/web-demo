@@ -6,9 +6,9 @@
 	<parent>
 		<groupId>io.jutil.web</groupId>
 		<artifactId>common</artifactId>
-		<version>0.1.0</version>
+		<version>${revision}</version>
 	</parent>
-	<artifactId>common-spring</artifactId>
+	<artifactId>common-springmvc</artifactId>
 	
 	<dependencies>
 		<dependency>

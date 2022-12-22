@@ -1,8 +1,8 @@
-package io.jutil.web.common.spring.fastjson;
+package io.jutil.web.common.springmvc.fastjson;
 
-import io.jutil.web.common.spring.BaseControllerTest;
-import io.jutil.web.common.spring.controller.TestRequest;
-import io.jutil.web.common.spring.controller.TestResponse;
+import io.jutil.web.common.springmvc.BaseControllerTest;
+import io.jutil.web.common.springmvc.controller.TestRequest;
+import io.jutil.web.common.springmvc.controller.TestResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

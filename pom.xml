@@ -6,7 +6,7 @@
 	
 	<groupId>io.jutil.web</groupId>
 	<artifactId>web-demo</artifactId>
-	<version>0.1.0</version>
+	<version>${revision}</version>
 	<packaging>pom</packaging>
 	
 	<modules>
@@ -30,6 +30,7 @@
 		<assembly.version>3.4.2</assembly.version>
 		<surefire.version>3.0.0-M7</surefire.version>
 		<jacoco.version>0.8.8</jacoco.version>
+		<flatten.version>1.3.0</flatten.version>
 		<sonar.version>3.9.1.2184</sonar.version>
 	</properties>
 	
@@ -90,6 +91,32 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten.version}</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>
