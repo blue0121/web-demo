@@ -17,9 +17,9 @@ public class DefaultStringResponse extends AbstractResponse<String> implements S
 
 		if (log.isDebugEnabled()) {
 			log.info("Http Response, code: {}, headers: {}, body: {}",
-					this.getCode(), this.getHeaders(), this.getBody());
+					this.getStatusCode(), this.getHeaders(), this.getBody());
 		} else {
-			log.info("Http Response, code: {}", this.getCode());
+			log.info("Http Response, code: {}", this.getStatusCode());
 		}
 	}
 

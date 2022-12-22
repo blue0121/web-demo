@@ -15,7 +15,14 @@ public interface Response<T> {
 	 *
 	 * @return
 	 */
-	int getCode();
+	int getStatusCode();
+
+	boolean is2xxStatus();
+
+	boolean is4xxStatus();
+
+	boolean is5xxStatus();
+
 
 	/**
 	 * Http headers

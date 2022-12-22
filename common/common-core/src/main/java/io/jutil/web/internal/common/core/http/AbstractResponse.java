@@ -17,13 +17,13 @@ import java.util.Map;
 @Slf4j
 public abstract class AbstractResponse<T> implements Response<T> {
 
-	private int code;
+	private int statusCode;
 	private Map<String, String> headers;
 	private Map<String, List<String>> map;
 	private T body;
 
 	public AbstractResponse(HttpResponse<T> response) {
-		this.code = response.statusCode();
+		this.statusCode = response.statusCode();
 		this.body = response.body();
 		this.map = response.headers().map();
 		this.initHeaders();
@@ -41,8 +41,23 @@ public abstract class AbstractResponse<T> implements Response<T> {
 	}
 
 	@Override
-	public int getCode() {
-		return code;
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	@Override
+	public boolean is2xxStatus() {
+		return statusCode >= 200 && statusCode < 300;
+	}
+
+	@Override
+	public boolean is4xxStatus() {
+		return statusCode >= 400 && statusCode < 500;
+	}
+
+	@Override
+	public boolean is5xxStatus() {
+		return statusCode >= 500;
 	}
 
 	@Override

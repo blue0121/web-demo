@@ -17,9 +17,9 @@ public class DefaultPathResponse extends AbstractResponse<Path> implements PathR
 
 		if (log.isDebugEnabled()) {
 			log.info("Http Response, code: {}, headers: {}, path: {}",
-					this.getCode(), this.getHeaders(), this.getBody());
+					this.getStatusCode(), this.getHeaders(), this.getBody());
 		} else {
-			log.info("Http Response, code: {}, path: {}", this.getCode(), this.getBody());
+			log.info("Http Response, code: {}, path: {}", this.getStatusCode(), this.getBody());
 		}
 	}
 }
