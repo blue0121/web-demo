@@ -2,6 +2,7 @@ package io.jutil.web.internal.common.core.http;
 
 import io.jutil.web.common.core.http.HttpTemplate;
 import io.jutil.web.common.core.http.HttpTemplateBuilder;
+import io.jutil.web.common.core.util.AssertUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.http.HttpClient;
@@ -34,6 +35,8 @@ public class DefaultHttpTemplateBuilder implements HttpTemplateBuilder {
     }
 
     private void init() {
+        AssertUtil.notNull(httpClient, "HttpClient");
+
         if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
             defaultHeaders.put("Authorization", this.authorization());
         }
@@ -95,8 +98,16 @@ public class DefaultHttpTemplateBuilder implements HttpTemplateBuilder {
     }
 
     @Override
-    public HttpTemplateBuilder putHeader(String name, String value) {
+    public HttpTemplateBuilder putDefaultHeader(String name, String value) {
         this.defaultHeaders.put(name, value);
+        return this;
+    }
+
+    @Override
+    public HttpTemplateBuilder putDefaultHeaders(Map<String, String> headers) {
+        if (headers != null && !headers.isEmpty()) {
+            this.defaultHeaders.putAll(headers);
+        }
         return this;
     }
 

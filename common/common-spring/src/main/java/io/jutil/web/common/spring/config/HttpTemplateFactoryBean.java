@@ -1,30 +1,27 @@
 package io.jutil.web.common.spring.config;
 
-import blue.base.core.http.HttpClient;
 import io.jutil.web.common.core.http.HttpTemplate;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.net.http.HttpClient;
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 /**
  * @author Jin Zheng
  * @since 1.0 2021-04-20
  */
-public class HttpClientFactoryBean implements FactoryBean<HttpTemplate>, InitializingBean {
+public class HttpTemplateFactoryBean implements FactoryBean<HttpTemplate>, InitializingBean {
 	private String id;
 	private String baseUrl;
-	private int timeout;
 	private String username;
 	private String password;
-	private String proxy;
 	private Map<String, String> defaultHeaders;
-	private Executor executor;
+	private HttpClient httpClient;
 
 	private HttpTemplate httpTemplate;
 
-	public HttpClientFactoryBean() {
+	public HttpTemplateFactoryBean() {
 	}
 
 	@Override
@@ -39,15 +36,13 @@ public class HttpClientFactoryBean implements FactoryBean<HttpTemplate>, Initial
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		this.httpTemplate = HttpClient.builder()
+		this.httpTemplate = HttpTemplate.builder()
 				.setId(id)
 				.setBaseUrl(baseUrl)
-				.setTimeout(timeout)
 				.setUsername(username)
 				.setPassword(password)
-				.setProxy(proxy)
-				.setDefaultHeaders(defaultHeaders)
-				.setExecutor(executor)
+				.putDefaultHeaders(defaultHeaders)
+				.setHttpClient(httpClient)
 				.build();
 	}
 
@@ -59,10 +54,6 @@ public class HttpClientFactoryBean implements FactoryBean<HttpTemplate>, Initial
 		this.baseUrl = baseUrl;
 	}
 
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -71,15 +62,11 @@ public class HttpClientFactoryBean implements FactoryBean<HttpTemplate>, Initial
 		this.password = password;
 	}
 
-	public void setProxy(String proxy) {
-		this.proxy = proxy;
-	}
-
 	public void setDefaultHeaders(Map<String, String> defaultHeaders) {
 		this.defaultHeaders = defaultHeaders;
 	}
 
-	public void setExecutor(Executor executor) {
-		this.executor = executor;
+	public void setHttpClient(HttpClient httpClient) {
+		this.httpClient = httpClient;
 	}
 }
