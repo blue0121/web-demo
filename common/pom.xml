@@ -15,6 +15,7 @@
         <module>common-core</module>
         <module>common-spring</module>
         <module>common-springmvc</module>
+	    <module>common-redis</module>
     </modules>
 
 </project>
