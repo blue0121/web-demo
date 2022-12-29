@@ -1,0 +1,9 @@
+jutil:
+  common:
+    redisson:
+      enabled: true
+      protocol: SINGLE
+      host: localhost:6379
+      password: ""
+      database: 0
+      timeout: 10000

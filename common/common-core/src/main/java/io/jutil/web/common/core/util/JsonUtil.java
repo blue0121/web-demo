@@ -21,7 +21,7 @@ public class JsonUtil {
 			JSONWriter.Feature.WriteEnumUsingToString
 	};
 
-	private static Filter autoTypeFilter = JSONReader.autoTypeFilter("io.jutil.web");
+	public static Filter AUTO_TYPE_FILTER = JSONReader.autoTypeFilter("io.jutil.web");
 
 	private JsonUtil() {
 	}
@@ -48,7 +48,7 @@ public class JsonUtil {
 			return null;
 		}
 
-		return (T) JSON.parseObject(bytes, Object.class, autoTypeFilter);
+		return (T) JSON.parseObject(bytes, Object.class, AUTO_TYPE_FILTER);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -65,7 +65,7 @@ public class JsonUtil {
 			return (T) new String(bytes, StandardCharsets.UTF_8);
 		}
 
-		return JSON.parseObject(bytes, clazz, autoTypeFilter);
+		return JSON.parseObject(bytes, clazz, AUTO_TYPE_FILTER);
 	}
 
 	public static String output(Object object) {
@@ -106,7 +106,7 @@ public class JsonUtil {
 			return null;
 		}
 
-		return (T) JSON.parseObject(json, Object.class, autoTypeFilter);
+		return (T) JSON.parseObject(json, Object.class, AUTO_TYPE_FILTER);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -119,7 +119,7 @@ public class JsonUtil {
 			return (T) json;
 		}
 
-		return JSON.parseObject(json, clazz, autoTypeFilter);
+		return JSON.parseObject(json, clazz, AUTO_TYPE_FILTER);
 	}
 
 }

@@ -38,7 +38,7 @@ public class FastJson2Codec extends BaseCodec {
 			var size = buf.readableBytes();
 			var bytes = new byte[size];
 			buf.readBytes(bytes);
-			return JsonUtil.fromBytes(bytes);
+			return JSON.parseObject(bytes, Object.class, JsonUtil.AUTO_TYPE_FILTER);
 		}
 	}
 
