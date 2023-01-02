@@ -1,4 +1,4 @@
-package io.jutil.web.common.springmvc.fastjson;
+package io.jutil.web.common.springmvc.config;
 
 import com.alibaba.fastjson2.support.config.FastJsonConfig;
 import com.alibaba.fastjson2.support.spring.http.converter.FastJsonHttpMessageConverter;

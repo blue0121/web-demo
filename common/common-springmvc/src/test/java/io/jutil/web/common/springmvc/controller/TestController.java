@@ -1,7 +1,9 @@
 package io.jutil.web.common.springmvc.controller;
 
+import io.jutil.web.common.springmvc.validation.group.GetOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,7 @@ public class TestController {
 	@PostMapping(value = "/test",
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public TestResponse say(@RequestBody TestRequest request) {
+	public TestResponse say(@RequestBody @Validated(GetOperation.class) TestRequest request) {
 		log.info("name: {}", request.getName());
 		var response = new TestResponse();
 		response.setName(request.getName());

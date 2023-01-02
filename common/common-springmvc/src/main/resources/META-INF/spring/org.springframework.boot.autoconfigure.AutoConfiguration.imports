@@ -1,0 +1,2 @@
+io.jutil.web.common.springmvc.config.FastJsonAutoConfiguration
+io.jutil.web.common.springmvc.config.ErrorCodeAutoConfiguration

@@ -1,0 +1,13 @@
+jutil:
+  common:
+    http:
+      enabled: true
+      configs:
+        - id: localhost
+          username: test1
+          password: test1
+          headers:
+            - name: Accept
+              value: application/json
+            - name: Content-Type
+              value: application/json

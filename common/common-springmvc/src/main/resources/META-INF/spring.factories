@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.util.web.common.spring.fastjson.FastJsonAutoConfiguration
