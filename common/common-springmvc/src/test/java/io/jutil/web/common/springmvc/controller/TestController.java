@@ -1,6 +1,6 @@
 package io.jutil.web.common.springmvc.controller;
 
-import io.jutil.web.common.springmvc.validation.group.GetOperation;
+import io.jutil.web.common.core.validation.group.GetOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;

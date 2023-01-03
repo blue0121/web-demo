@@ -1,6 +1,6 @@
 package io.jutil.web.common.springmvc.controller;
 
-import io.jutil.web.common.springmvc.validation.group.GetOperation;
+import io.jutil.web.common.core.validation.group.GetOperation;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

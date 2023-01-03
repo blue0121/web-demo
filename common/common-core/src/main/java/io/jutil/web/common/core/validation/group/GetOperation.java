@@ -1,4 +1,4 @@
-package io.jutil.web.common.springmvc.validation.group;
+package io.jutil.web.common.core.validation.group;
 
 /**
  * @author Jin Zheng
