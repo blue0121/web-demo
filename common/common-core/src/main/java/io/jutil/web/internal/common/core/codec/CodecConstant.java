@@ -12,7 +12,5 @@ class CodecConstant {
 	static final int INT_LEN = 4;
 	static final int LONG_LEN = 8;
 	static final int ZERO_IDX = 0;
-	static final byte BYTE_NULL = -1;
-	static final byte BYTE_EMPTY = 0;
-	static final int BYTE_SKIP_OFFSET = -1;
+	static final int LEN_EMPTY = 0;
 }

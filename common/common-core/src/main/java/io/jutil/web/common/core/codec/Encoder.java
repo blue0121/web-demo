@@ -42,8 +42,6 @@ public interface Encoder {
 
 	void writeInstant(Instant val);
 
-	void writeNumber(Number val);
-
 	int getWriteIndex();
 
 	int getCapacity();

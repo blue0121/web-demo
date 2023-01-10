@@ -42,8 +42,6 @@ public interface Decoder {
 
 	Instant readInstant();
 
-	<T extends Number> T readNumber(Class<T> clazz);
-
 	int getReadIndex();
 
 	int getSize();

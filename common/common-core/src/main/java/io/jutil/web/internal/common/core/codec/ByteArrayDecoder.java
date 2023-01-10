@@ -146,81 +146,42 @@ public class ByteArrayDecoder implements Decoder {
 
 	@Override
 	public String readString() {
-		var exists = this.readByte();
-		if (exists == CodecConstant.BYTE_NULL) {
-			return null;
-		}
-		if (exists == CodecConstant.BYTE_EMPTY) {
+		var len = this.readInt();
+		if (len == 0) {
 			return "";
 		}
-		this.skipReadIndex(CodecConstant.BYTE_SKIP_OFFSET);
-		var len = this.readInt();
 		this.checkIndex(len);
 		String str = new String(buffer, index, len, StandardCharsets.UTF_8);
 		this.index += len;
 		return str;
 	}
 
-	private boolean readIsNull() {
-		var exist = this.readByte();
-		this.skipReadIndex(CodecConstant.BYTE_SKIP_OFFSET);
-		return exist == CodecConstant.BYTE_NULL;
-	}
-
 	@Override
 	public Date readDate() {
-		if (this.readIsNull()) {
+		var val = this.readLong();
+		if (val == 0L) {
 			return null;
 		}
-		var val = this.readLong();
 		return new Date(val);
 	}
 
 	@Override
 	public LocalDateTime readLocalDateTime() {
-		if (this.readIsNull()) {
+		var val = this.readLong();
+		if (val == 0L) {
 			return null;
 		}
-		var instant = this.readInstantInternal();
+		var instant = Instant.ofEpochMilli(val);
 		return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
-	}
-
-	private Instant readInstantInternal() {
-		var second = this.readLong();
-		var nano = this.readInt();
-		return Instant.ofEpochSecond(second, nano);
 	}
 
 	@Override
 	public Instant readInstant() {
-		if (this.readIsNull()) {
+		var val = this.readLong();
+		if (val == 0L) {
 			return null;
 		}
-		return this.readInstantInternal();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Number> T readNumber(Class<T> clazz) {
-		if (this.readIsNull()) {
-			return null;
-		}
-		Number val = null;
-		if (clazz == Byte.class) {
-			val = this.readByte();
-		} else if (clazz == Short.class) {
-			val = this.readShort();
-		} else if (clazz == Integer.class) {
-			val = this.readInt();
-		} else if (clazz == Long.class) {
-			val = this.readLong();
-		} else if (clazz == Float.class) {
-			val = this.readFloat();
-		} else if (clazz == Double.class) {
-			val = this.readDouble();
-		}
-
-		return (T) val;
+		return Instant.ofEpochMilli(val);
 	}
 
 	@Override

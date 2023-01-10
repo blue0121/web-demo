@@ -49,51 +49,6 @@ public class SerializableTest {
 		Assertions.assertEquals(obj1.getValChar(), obj2.getValChar());
 	}
 
-	@Test
-	public void testNumberType1() {
-		var obj1 = new NumberTypeObject();
-		obj1.setValByte((byte)0x01);
-		obj1.setValShort((short)0x0100);
-		obj1.setValInt(0x01000000);
-		obj1.setValLong(0x0100000000000000L);
-		obj1.setValFloat(1.1f);
-		obj1.setValDouble(100.001);
-
-		var base64 = SerializableUtil.encodeBase64(obj1);
-		log.info("Byte, len: {}, text: {}", base64.length(), base64);
-		var json = JsonUtil.output(obj1);
-		log.info("Byte, len: {}, text: {}", json.length(), json);
-		var obj2 = new NumberTypeObject();
-		SerializableUtil.decode(obj2, base64);
-
-		Assertions.assertEquals(obj1.getValByte(), obj2.getValByte());
-		Assertions.assertEquals(obj1.getValShort(), obj2.getValShort());
-		Assertions.assertEquals(obj1.getValInt(), obj2.getValInt());
-		Assertions.assertEquals(obj1.getValLong(), obj2.getValLong());
-		Assertions.assertEquals(obj1.getValFloat(), obj2.getValFloat());
-		Assertions.assertEquals(obj1.getValDouble(), obj2.getValDouble());
-	}
-
-	@Test
-	public void testNumberType2() {
-		var obj1 = new NumberTypeObject();
-		obj1.setValInt(0x01000000);
-
-		var base64 = SerializableUtil.encodeBase64(obj1);
-		log.info("Byte, len: {}, text: {}", base64.length(), base64);
-		var json = JsonUtil.output(obj1);
-		log.info("Byte, len: {}, text: {}", json.length(), json);
-		var obj2 = new NumberTypeObject();
-		SerializableUtil.decode(obj2, base64);
-
-		Assertions.assertNull(obj2.getValByte());
-		Assertions.assertNull(obj2.getValShort());
-		Assertions.assertEquals(obj1.getValInt(), obj2.getValInt());
-		Assertions.assertNull(obj2.getValLong());
-		Assertions.assertNull(obj2.getValFloat());
-		Assertions.assertNull(obj2.getValDouble());
-	}
-
 	@ParameterizedTest
 	@CsvSource({"blue", "<NULL>", "<EMPTY>"})
 	public void testStringType(String val) {
@@ -115,7 +70,7 @@ public class SerializableTest {
 		if (val != null) {
 			Assertions.assertEquals(obj1.getValStr(), obj2.getValStr());
 		} else {
-			Assertions.assertNull(obj2.getValStr());
+			Assertions.assertEquals("", obj2.getValStr());
 		}
 	}
 
@@ -134,8 +89,8 @@ public class SerializableTest {
 		SerializableUtil.decode(obj2, base64);
 
 		Assertions.assertEquals(obj1.getValDate(), obj2.getValDate());
-		Assertions.assertEquals(obj1.getValLocalDateTime(), obj2.getValLocalDateTime());
-		Assertions.assertEquals(obj1.getValInstant(), obj2.getValInstant());
+		Assertions.assertEquals(obj1.getValLocalDateTime().truncatedTo(ChronoUnit.MILLIS), obj2.getValLocalDateTime());
+		Assertions.assertEquals(obj1.getValInstant().truncatedTo(ChronoUnit.MILLIS), obj2.getValInstant());
 	}
 
 	@Test

@@ -132,12 +132,8 @@ public class ByteArrayEncoder implements Encoder {
 
 	@Override
 	public void writeString(String val) {
-		if (val == null) {
-			this.writeByte(CodecConstant.BYTE_NULL);
-			return;
-		}
-		if (val.isEmpty()) {
-			this.writeByte(CodecConstant.BYTE_EMPTY);
+		if (val == null || val.isEmpty()) {
+			this.writeInt(CodecConstant.LEN_EMPTY);
 			return;
 		}
 		byte[] bytes = val.getBytes(StandardCharsets.UTF_8);
@@ -148,7 +144,7 @@ public class ByteArrayEncoder implements Encoder {
 	@Override
 	public void writeDate(Date val) {
 		if (val == null) {
-			this.writeByte(CodecConstant.BYTE_NULL);
+			this.writeLong(CodecConstant.LEN_EMPTY);
 			return;
 		}
 
@@ -158,46 +154,20 @@ public class ByteArrayEncoder implements Encoder {
 	@Override
 	public void writeLocalDateTime(LocalDateTime val) {
 		if (val == null) {
-			this.writeByte(CodecConstant.BYTE_NULL);
+			this.writeLong(CodecConstant.LEN_EMPTY);
 			return;
 		}
 		var instant = val.atZone(ZoneId.systemDefault()).toInstant();
-		this.writeInstantInternal(instant);
-	}
-
-	private void writeInstantInternal(Instant val) {
-		this.writeLong(val.getEpochSecond());
-		this.writeInt(val.getNano());
+		this.writeLong(instant.toEpochMilli());
 	}
 
 	@Override
 	public void writeInstant(Instant val) {
 		if (val == null) {
-			this.writeByte(CodecConstant.BYTE_NULL);
+			this.writeLong(CodecConstant.LEN_EMPTY);
 			return;
 		}
-		this.writeInstantInternal(val);
-	}
-
-	@Override
-	public void writeNumber(Number val) {
-		if (val == null) {
-			this.writeByte(CodecConstant.BYTE_NULL);
-			return;
-		}
-		if (val instanceof Byte) {
-			this.writeByte(val.byteValue());
-		} else if (val instanceof Short) {
-			this.writeShort(val.shortValue());
-		} else if (val instanceof Integer) {
-			this.writeInt(val.intValue());
-		} else if (val instanceof Long) {
-			this.writeLong(val.longValue());
-		} else if (val instanceof Float) {
-			this.writeFloat(val.floatValue());
-		} else if (val instanceof Double) {
-			this.writeDouble(val.doubleValue());
-		}
+		this.writeLong(val.toEpochMilli());
 	}
 
 	@Override
